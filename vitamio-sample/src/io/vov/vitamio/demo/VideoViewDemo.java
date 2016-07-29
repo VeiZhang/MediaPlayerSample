@@ -54,8 +54,10 @@ public class VideoViewDemo extends Activity {
 	void playfunction(){
 		 String path = "";
 		 
-		 path="";
-		 path="http://gslb.miaopai.com/stream/oxX3t3Vm5XPHKUeTS-zbXA__.mp4";
+//		 path="/sdcard/dao.mp4";
+		 path="http://dlqncdn.miaopai.com/stream/MVaux41A4lkuWloBbGUGaQ__.mp4";
+//		 path="http://185.53.11.167:8081/MOV000880426093027?AuthInfo=e4069b146f8f4f1ff67df6054271be90adee55c20a77fe872e2329e66a52ab609920ea6e619e1f8ea684e39891e7f2f6a97e7561777da0a0cffd60cc89d556a3dd9f6e0649a2fc45e45e12d076e98697";
+//		 path="http://gslb.miaopai.com/stream/oxX3t3Vm5XPHKUeTS-zbXA__.mp4";
 		 VideoView mVideoView;
 		 EditText mEditText;
 		mEditText = (EditText) findViewById(R.id.url);
