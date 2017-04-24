@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 		if (position == 0)
 		{
 			play();
-			mMediaPlayer.seekTo(position);
 		}
 	}
 
@@ -174,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
 			mMediaPlayer.reset();
 			mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mMediaPlayer.setDataSource("/sdcard/dao.mp4");
+			mMediaPlayer.setDataSource("/sdcard/434661.mkv");
 			// 是否循环
 			mMediaPlayer.setLooping(true);
 			// 设置显示视频显示在SurfaceView上
