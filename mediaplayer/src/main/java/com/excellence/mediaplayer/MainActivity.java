@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -141,9 +140,12 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 		}
 	}
 
+	/**
+	 * 注意设置视频方法{@link MediaPlayer#setDisplay(SurfaceHolder)}的位置，否则容易黑屏
+	 */
 	private void play()
 	{
-		// 必须在surface创建后才能初始化MediaPlayer,否则不会显示图像
+		// 必须在surface创建后才能初始化MediaPlayer, mMediaPlayer.setDisplay(mSurfaceHolder)，要在设置播放源后,否则不会显示图像
 		try
 		{
 			mMediaPlayer = new MediaPlayer();
