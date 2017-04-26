@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
-public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback, PopupWindow.OnDismissListener, View.OnKeyListener, MediaPlayer.OnInfoListener, MediaPlayer.OnErrorListener
+public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback, MediaPlayer.OnInfoListener, MediaPlayer.OnErrorListener, View.OnClickListener
 {
 	private static final long TRAVEL_TIME = 5 * 1000;
 	private static final String TAG = MainActivity.class.getSimpleName();
@@ -63,16 +63,15 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 			mControlWindow.setAnimationStyle(R.style.pop_anim);
 			mControlWindow.setFocusable(true);
 			mControlWindow.setOutsideTouchable(true);
-			mControlWindow.setOnDismissListener(this);
 
 			mBackBtn = (Button) controlView.findViewById(R.id.back_btn);
 			mStartBtn = (Button) controlView.findViewById(R.id.start_btn);
 			mNextBtn = (Button) controlView.findViewById(R.id.next_btn);
 			mStartBtn.requestFocus();
 
-			mStartBtn.setOnKeyListener(this);
-			mBackBtn.setOnKeyListener(this);
-			mNextBtn.setOnKeyListener(this);
+			mStartBtn.setOnClickListener(this);
+			mBackBtn.setOnClickListener(this);
+			mNextBtn.setOnClickListener(this);
 		}
 	}
 
@@ -92,23 +91,10 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 	}
 
 	@Override
-	public boolean onKey(View v, int keyCode, KeyEvent event)
-	{
-		if (event.getAction() == KeyEvent.ACTION_DOWN)
-		{
-			switch (keyCode)
-			{
-			case KeyEvent.KEYCODE_DPAD_CENTER:
-				return clickEvent(v);
-			}
-		}
-		return false;
-	}
-
-	private boolean clickEvent(View v)
+	public void onClick(View v)
 	{
 		if (mMediaPlayer == null)
-			return true;
+			return;
 
 		switch (v.getId())
 		{
@@ -144,13 +130,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 			}
 			break;
 		}
-		return false;
-	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event)
-	{
-		return super.onKeyDown(keyCode, event);
 	}
 
 	@Override
@@ -213,12 +192,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 	};
 
 	@Override
-	public void onDismiss()
-	{
-
-	}
-
-	@Override
 	protected void onResume()
 	{
 		super.onResume();
@@ -262,6 +235,9 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 			mMediaPlayer.stop();
 		// Activity销毁时停止播放，释放资源。不做这个操作，即使退出还是能听到视频播放的声音
 		mMediaPlayer.release();
+
+		if (mSurfaceHolder != null)
+			mSurfaceHolder.getSurface().release();
 	}
 
 	@Override
@@ -280,4 +256,5 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 		finish();
 		return true;
 	}
+
 }
